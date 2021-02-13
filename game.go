@@ -49,7 +49,7 @@ func multiPlayer() {
 	fmt.Println("multi")
 	var input string
 	for {
-		fmt.Println("Pic your sign (x or o)")
+		fmt.Println("Pick your sign (x or o)")
 		fmt.Scanln(&input)
 		if input == "x" {
 			p1.PlayerSign = "x"
@@ -158,7 +158,7 @@ func (gf *gameField) move(p playerSign) bool {
 }
 
 func (gf *gameField) finalMoveCheck() bool {
-
+	// add draft???
 	// check row
 	for i := 0; i < len(gf); i++ {
 		if gf[i][0] == gf[i][1] && gf[i][1] == gf[i][2] {
@@ -183,7 +183,7 @@ func (gf *gameField) finalMoveCheck() bool {
 			}
 		}
 	}
-
+	// diagonal
 	if gf[0][0] == gf[1][1] && gf[1][1] == gf[2][2] {
 		if gf[0][0] == "x" {
 			fmt.Println("x WON!")
