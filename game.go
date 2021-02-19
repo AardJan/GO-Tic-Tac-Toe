@@ -10,7 +10,7 @@ type gameField [3][3]string
 
 type playerSign struct {
 	PlayerName string
-	PlayerSign string
+	Sign       string
 	IsComputer bool
 }
 type cord struct {
@@ -64,12 +64,12 @@ func multiPlayer() {
 		fmt.Println("Pick your sign (x or o)")
 		fmt.Scanln(&input)
 		if input == "x" {
-			p1.PlayerSign = "x"
-			p2.PlayerSign = "o"
+			p1.Sign = "x"
+			p2.Sign = "o"
 			break
 		} else if input == "o" {
-			p1.PlayerSign = "o"
-			p2.PlayerSign = "x"
+			p1.Sign = "o"
+			p2.Sign = "x"
 			break
 		}
 		fmt.Println("Wrong sign, try again")
@@ -100,16 +100,11 @@ func multiPlayer() {
 		renderBoard(gf)
 		// Detect final move and stop play loop
 		if finalMoveCheck(&gf) {
-			// renderBoardFinal(gf, false)
+			// TODO:renderBoardFinal(gf, false)
 			break
 		}
 		c++
 	}
-
-}
-
-func singlePlayer() {
-	fmt.Println("single")
 
 }
 
@@ -162,7 +157,7 @@ func (gf *gameField) move(p playerSign) bool {
 	var input string
 	var row, col int
 	var err error
-	fmt.Println(p.PlayerName, string(cPurple), p.PlayerSign, string(cReset), " move")
+	fmt.Println(p.PlayerName, string(cPurple), p.Sign, string(cReset), " move")
 	for {
 		fmt.Println("row:")
 		fmt.Scanln(&input)
@@ -184,7 +179,7 @@ func (gf *gameField) move(p playerSign) bool {
 		}
 	}
 	if gf[row-1][col-1] == " " {
-		gf[row-1][col-1] = p.PlayerSign
+		gf[row-1][col-1] = p.Sign
 		return true
 	}
 	fmt.Println("Field already set, try again.")
@@ -256,7 +251,7 @@ func finalMoveCheck(gf *gameField) bool {
 	}
 
 	if moveIsAvailable(gf) {
-		return true
+		return false
 	}
 
 	return false
