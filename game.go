@@ -250,14 +250,16 @@ func finalMoveCheck(gf *gameField) bool {
 		}
 	}
 
-	if moveIsAvailable(gf) {
-		return false
+	if !moveIsAvailable(gf) {
+		fmt.Println("DRAW!")
+		return true
 	}
 
 	return false
 }
 
 // moveIsAvailable check we have empty field on the board
+// return true if exists empty filed else false
 func moveIsAvailable(gf *gameField) bool {
 	for i := 0; i < len(gf); i++ {
 		for j := 0; j < len(gf[0]); j++ {

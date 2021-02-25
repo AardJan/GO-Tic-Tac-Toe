@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 // singlePlayer game run
@@ -53,12 +52,11 @@ func singlePlayer() {
 		if !rS {
 			continue
 		}
-		// CallClear()
+		CallClear()
 		renderBoard(gf)
 		// Detect final move and stop play loop
 		if finalMoveCheck(&gf) {
 			// renderBoardFinal(gf, false)
-			fmt.Println("Final move!")
 			break
 		}
 		c++
@@ -134,28 +132,6 @@ func evaluate(gf *gameField) int {
 func minmax(gf *gameField, depth int, isMax bool) int {
 	score := evaluate(gf)
 
-	f, err := os.OpenFile("./test.log", os.O_APPEND|os.O_WRONLY, 0644)
-	if err != nil {
-		fmt.Println("Error open file")
-		os.Exit(-1)
-	}
-	fmt.Fprintf(f, fmt.Sprintln("Score ", score, " Depth: ", depth, " isMax: ", isMax))
-	for i := 0; i < len(gf); i++ {
-		for j := 0; j < len(gf[0]); j++ {
-			fmt.Fprintf(f, fmt.Sprint(gf[i][j]))
-			if j < 2 {
-				fmt.Fprintf(f, "|")
-			}
-		}
-		fmt.Fprintf(f, "\n")
-		if i < 2 {
-			fmt.Fprintf(f, "------\n")
-		}
-	}
-	// fmt.Println("Score ", score, " Depth: ", depth)
-	fmt.Fprintf(f, "\n")
-	f.Close()
-
 	if score == 10 {
 		return score
 	}
@@ -218,8 +194,6 @@ func findBestMove(gf *gameField) cord {
 			}
 		}
 	}
-	fmt.Println("bestVal: ", bestVal)
-	fmt.Println("bestMove: ", bestMove)
 	return bestMove
 }
 
